@@ -20,6 +20,12 @@ class GameMechs
         int boardSizeX;
         int boardSizeY;
 
+        int speed;
+
+
+
+        
+
         objPos food;
 
     public:
@@ -43,6 +49,12 @@ class GameMechs
         void incrementScore();
         
         // More methods should be added here
+        int getSpeed();
+        int setSpeed();
+
+
+
+
 };
 
 #endif

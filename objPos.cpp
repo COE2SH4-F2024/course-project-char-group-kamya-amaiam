@@ -38,7 +38,7 @@ objPos& objPos::operator = (const objPos& a)
 
     delete pos;
     pos = new Pos;
-    pos->x=a.pos->x;
+    pos->x = a.pos->x;
     pos->y = a.pos->y;
     symbol = a.symbol;
 
