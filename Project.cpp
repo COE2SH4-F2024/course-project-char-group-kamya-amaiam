@@ -2,11 +2,16 @@
 #include "MacUILib.h"
 #include "objPos.h"
 
+#include "Player.h"
+
 using namespace std;
 
 #define DELAY_CONST 100000
 
-bool exitFlag;
+
+Player *myPlayer; // global pointer meant to instantiate a player object 
+GameMechs *myGM;
+
 
 void Initialize(void);
 void GetInput(void);
@@ -22,7 +27,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(myGM->getExitFlagStatus()==false)
     {
         GetInput();
         RunLogic();
@@ -40,22 +45,58 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    exitFlag = false;
+    myGM=new GameMechs();
+    myPlayer = new Player(myGM);
+
+   
 }
 
 void GetInput(void)
 {
-   
+   char input = myGM->getInput();
+   MacUILib_printf("input = %c\n", input);
+   myGM->setInput(input);
 }
 
 void RunLogic(void)
 {
+    myPlayer->updatePlayerDir();
+    myPlayer->movePlayer();
     
 }
 
 void DrawScreen(void)
+
 {
-    MacUILib_clearScreen();    
+    MacUILib_clearScreen();  
+    objPos playerPos = myPlayer -> getPlayerPos();
+    printf  ("player [x, y, symbol] = [%d, %d, %c]\n" , playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
+    
+    for (int i = 0; i < myGM->getBoardSizeY(); i++)//columns 
+    {
+ 
+        for (int j = 0; j < myGM->getBoardSizeX(); j++)//rows
+        {
+            if  (j == 0 || j == myGM->getBoardSizeX()-1 || i == 0 || i == myGM->getBoardSizeY()-1)
+            {
+                MacUILib_printf("#");
+                
+            } 
+            else if (i == playerPos.pos->y && j == playerPos.pos->x)
+            {
+                MacUILib_printf("%c", playerPos.symbol);
+            }
+            else
+            {
+                MacUILib_printf(" ");
+
+            }  
+
+        }
+         MacUILib_printf("\n");
+          
+    }
+    
 }
 
 void LoopDelay(void)
@@ -66,7 +107,18 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
+    MacUILib_clearScreen();   
+
+    if(myGM->getLoseFlagStatus())
+    {
+        MacUILib_printf("Game Over ! you lose.\n");
+    } 
+    else 
+    {
+        MacUILib_printf("Thanks for playing!!\n");
+    }
+    delete myPlayer;
+    delete myGM;
 
     MacUILib_uninit();
 }
