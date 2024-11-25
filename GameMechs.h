@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 class GameMechs
 {
     private:
@@ -22,11 +23,10 @@ class GameMechs
 
         int speed;
 
-
-
-        
-
         objPos food;
+
+
+
 
     public:
         GameMechs();
@@ -50,7 +50,7 @@ class GameMechs
         
         // More methods should be added here
         int getSpeed();
-        int setSpeed();
+        void setSpeed(char symbol);
 
 
 
