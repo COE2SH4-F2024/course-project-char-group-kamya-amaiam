@@ -102,7 +102,7 @@ void GameMechs::clearInput()
 
 // More methods should be added here
 
-int GameMechs::getSpeed()
+int GameMechs::getSpeed() const
 {
     return speed;
 }

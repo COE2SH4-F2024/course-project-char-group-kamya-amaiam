@@ -49,7 +49,7 @@ class GameMechs
         void incrementScore();
         
         // More methods should be added here
-        int getSpeed();
+        int getSpeed() const;
         void setSpeed(char symbol);
 
 
