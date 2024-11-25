@@ -30,11 +30,12 @@ objPos Player::getPlayerPos() const
 void Player::updatePlayerDir()
 {
         char input = mainGameMechsRef->getInput();
+        
         if(input!=0)
         {
             switch(input)
         {                      
-            case 'W':
+            case 'W':  //UP
             case 'w':
                 if (currentdir != DOWN && currentdir != UP)
                 {
@@ -42,7 +43,7 @@ void Player::updatePlayerDir()
                 }
                 break;
             
-            case 'A':
+            case 'A':   //LEFT
             case 'a':
                 if (currentdir != RIGHT && currentdir != LEFT)
                     {
@@ -50,7 +51,7 @@ void Player::updatePlayerDir()
                     }
                 break;
 
-            case 'S':
+            case 'S':   //DOWN
             case 's':
                 if (currentdir != UP && currentdir != DOWN)
                 {
@@ -58,7 +59,7 @@ void Player::updatePlayerDir()
                 }
                 break;
 
-            case 'D':
+            case 'D':    //RIGHT
             case 'd':
                 if (currentdir != LEFT && currentdir != RIGHT)
                 {
@@ -71,7 +72,8 @@ void Player::updatePlayerDir()
             default:
                 break;
         } 
-        mainGameMechsRef->clearInput();      
+        mainGameMechsRef->clearInput();  
+            
 }
 
         }
