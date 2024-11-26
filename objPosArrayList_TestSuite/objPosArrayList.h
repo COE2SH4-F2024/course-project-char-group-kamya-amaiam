@@ -8,7 +8,7 @@
 class objPosArrayList
 {
     private:
-        
+
         int listSize;
         int arrayCapacity;
         objPos* aList;
@@ -18,8 +18,7 @@ class objPosArrayList
         ~objPosArrayList();
         objPosArrayList(const objPosArrayList &sList); 
         objPosArrayList& operator=(const objPosArrayList &sList);
-
-
+        
 
         int getSize() const;
 
