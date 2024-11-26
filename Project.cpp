@@ -13,6 +13,7 @@ Player *myPlayer; // global pointer meant to instantiate a player object
 GameMechs *myGM;
 
 
+
 void Initialize(void);
 void GetInput(void);
 void RunLogic(void);
