@@ -8,15 +8,21 @@
 class objPosArrayList
 {
     private:
-        objPos* aList;
+        
         int listSize;
         int arrayCapacity;
+        objPos* aList;
 
     public:
         objPosArrayList();
         ~objPosArrayList();
+        objPosArrayList(const objPosArrayList &sList); 
+        objPosArrayList& operator=(const objPosArrayList &sList);
+
+
 
         int getSize() const;
+
         void insertHead(objPos thisPos);
         void insertTail(objPos thisPos);
         void removeHead();
