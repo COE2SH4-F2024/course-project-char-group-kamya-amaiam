@@ -51,13 +51,13 @@ void Initialize(void)
     myGM=new GameMechs();
     myPlayer = new Player(myGM);
 
-   
+    myGM->generateFood(myPlayer->getPlayerPos());
+
 }
 
 void GetInput(void)
 {
    char input = myGM->getInput();
-   MacUILib_printf("input = %c\n", input);
    myGM->setInput(input);
 }
 
@@ -77,26 +77,32 @@ void DrawScreen(void)
     MacUILib_printf("Press 'Q' to decrease speed and 'E' to increase speed.\nCurrent Speed Level: %d\n\n", (myGM->getSpeed()+1));
     MacUILib_printf("Press 'esc' to exit.\n\n\n");
     //POSITION STATS
-    objPos playerPos = myPlayer -> getPlayerPos();
+    objPos playerPos = myPlayer -> getPlayerPos(); 
+    objPos foodPos = myGM->getFoodPos();
     MacUILib_printf("player [x, y, symbol] = [%d, %d, %c]\n" , playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
     
+    int boardX = myGM->getBoardSizeX(); //gets rows value
+    int boardY = myGM->getBoardSizeY(); //gets column value
 
 
 
-
-    for (int i = 0; i < myGM->getBoardSizeY(); i++)//columns 
+    for (int i = 0; i < boardY; i++)//columns 
     {
  
-        for (int j = 0; j < myGM->getBoardSizeX(); j++)//rows
+        for (int j = 0; j < boardX; j++)//rows
         {
-            if  (j == 0 || j == myGM->getBoardSizeX()-1 || i == 0 || i == myGM->getBoardSizeY()-1)
+            if  (j == 0 || j == boardX-1 || i == 0 || i == boardY-1) //draws border 
             {
                 MacUILib_printf("#");
             } 
 
-            else if (i == playerPos.pos->y && j == playerPos.pos->x)
+            else if (i == playerPos.pos->y && j == playerPos.pos->x) //draws player 
             {
                 MacUILib_printf("%c", playerPos.symbol);
+            }
+            else if (i == foodPos.pos->y && j == foodPos.pos->x) //draws food 
+            {
+                MacUILib_printf("%c", foodPos.symbol);
             }
 
             else

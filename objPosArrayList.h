@@ -13,10 +13,14 @@ class objPosArrayList
         int arrayCapacity;
 
     public:
-        objPosArrayList();
-        ~objPosArrayList();
+        objPosArrayList(); //constructor (1/4)
+        ~objPosArrayList(); //destructor (2/4)
+        objPosArrayList(const objPosArrayList &sList); //copy constructor (3/4)
+        objPosArrayList& operator=(const objPosArrayList &sList); //copy assignment constructor (4/4)
+
 
         int getSize() const;
+
         void insertHead(objPos thisPos);
         void insertTail(objPos thisPos);
         void removeHead();
@@ -25,6 +29,7 @@ class objPosArrayList
         objPos getHeadElement() const;
         objPos getTailElement() const;
         objPos getElement(int index) const;
+    
 };
 
 #endif

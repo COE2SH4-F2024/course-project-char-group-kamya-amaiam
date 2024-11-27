@@ -11,7 +11,9 @@ GameMechs::GameMechs()
     boardSizeX = 30;
     boardSizeY = 15;
 
-    speed = 0;
+    speed = 0; //initial speed  
+
+    food.setObjPos(-10,-10,'*');//initialize it outside the game board 
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
@@ -25,6 +27,8 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeY = boardY;
 
     speed = 0;
+
+    food.setObjPos(-10,-10,'*');//initialize it outside the game board 
     
 }
 
@@ -119,4 +123,35 @@ void GameMechs::setSpeed(char symbol)
         if (speed <= 0) {speed = 0;}
     }
 
+}
+
+void GameMechs::generateFood(objPos blockoff)
+{
+    //player position for now 
+    srand(time(NULL));
+
+    int randX, randY;
+
+    bool uniquePos = false;
+    while(!uniquePos)
+    {
+        randX = rand()%(boardSizeX-2) + 1;
+        randY = rand()%(boardSizeY-2) + 1;
+
+        if(randX != blockoff.pos->x || randY != blockoff.pos->y)
+        {
+            uniquePos = true;
+            food.setObjPos(randX, randY, '*');
+            MacUILib_printf("generated food positions %d, %d", randX, randY);
+        }
+    }
+
+    
+
+
+}
+
+objPos GameMechs::getFoodPos() const
+{
+    return food; 
 }
