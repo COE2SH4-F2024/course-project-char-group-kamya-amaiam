@@ -119,3 +119,28 @@ objPos objPosArrayList::getElement(int index) const {
     return aList[index].getObjPos();
     
 }
+
+
+//ITERATION 3
+
+bool checkFoodConsumption(){
+
+    
+
+
+}
+
+
+void increasePlayerLength(){
+
+
+
+}
+
+
+bool checkSelfCollision(){
+
+
+
+
+}
