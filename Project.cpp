@@ -77,9 +77,9 @@ void DrawScreen(void)
     MacUILib_printf("Press 'Q' to decrease speed and 'E' to increase speed.\nCurrent Speed Level: %d\n\n", (myGM->getSpeed()+1));
     MacUILib_printf("Press 'esc' to exit.\n\n\n");
     //POSITION STATS
-    objPosArrayList playerPosList = myPlayer->getPlayerPos(); 
+    objPos playerPos = myPlayer -> getPlayerPos(); 
     objPos foodPos = myGM->getFoodPos();
-    MacUILib_printf("player [x, y, symbol] = [%d, %d, %c]\n" , playerPosList->getElement(0).pos->x, playerPosList->getElement(0).pos->y, playerPosList->getElement(0).symbol);
+    MacUILib_printf("player [x, y, symbol] = [%d, %d, %c]\n" , playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
     
     int boardX = myGM->getBoardSizeX(); //gets rows value
     int boardY = myGM->getBoardSizeY(); //gets column value
@@ -96,11 +96,11 @@ void DrawScreen(void)
                 MacUILib_printf("#");
             } 
 
-            else if (i == playerPosList->getElement(0).pos->y && j == playerPosList->getElement(0).pos->x) //draws player 
+            else if (i == playerPos.pos->y && j == playerPos.pos->x) //draws player 
             {
-                MacUILib_printf("%c", playerPosList.symbol);
+                MacUILib_printf("%c", playerPos.symbol);
             }
-            else if (i == playerPosList->getElement(0).pos->y && j == playerPosList->getElement(0).pos->x) //draws food 
+            else if (i == foodPos.pos->y && j == foodPos.pos->x) //draws food 
             {
                 MacUILib_printf("%c", foodPos.symbol);
             }

@@ -4,7 +4,7 @@
 
 objPosArrayList::objPosArrayList(){ //constructor
 
-    listSize = 1;
+    listSize = 0;
     arrayCapacity = ARRAY_MAX_CAP;
     aList = new objPos [ARRAY_MAX_CAP];
     
@@ -118,29 +118,4 @@ objPos objPosArrayList::getElement(int index) const {
 
     return aList[index].getObjPos();
     
-}
-
-
-//ITERATION 3
-
-bool checkFoodConsumption(){
-
-    
-
-
-}
-
-
-void increasePlayerLength(){
-
-
-
-}
-
-
-bool checkSelfCollision(){
-
-
-
-
 }

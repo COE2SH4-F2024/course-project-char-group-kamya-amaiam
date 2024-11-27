@@ -7,29 +7,24 @@ Player::Player(GameMechs* thisGMRef)
     currentdir = STOP;
 
     // more actions to be included
-    //playerPosList->getElement(0).pos->x = mainGameMechsRef->getBoardSizeX() / 2;
-    //playerPosList->getElement(0).pos->y = mainGameMechsRef->getBoardSizeY() / 2;
-    //playerPosList->getElement(0).symbol = '@';
-
-    
-
-    playerPosList->getElement(0).setObjPos(mainGameMechsRef->getBoardSizeX() / 2, mainGameMechsRef->getBoardSizeY() / 2, '@');
-
-
-    
+    playerPos.pos->x = mainGameMechsRef->getBoardSizeX() / 2;
+    playerPos.pos->y = mainGameMechsRef->getBoardSizeY() / 2;
+    playerPos.symbol = '@';
 
 }
-
 
 
 Player::~Player()
 {
-    delete[] playerPosList;
+    // delete any heap members here
+    //no key word new in the constructor 
+    //leave it empty for now 
 }
 
-objPosArrayList* Player::getPlayerPos() const
+objPos Player::getPlayerPos() const
 {
-    return playerPosList;
+    // return the reference to the playerPos arrray list
+    return playerPos;
 }
 
 void Player::updatePlayerDir()
@@ -109,43 +104,43 @@ void Player::movePlayer()
         {
             case UP:
                 // [TODO] : Heed the border wraparound!!!
-                if (playerPosList->getElement(0).pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
+                if (playerPos.pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
                 {
-                    playerPosList->getElement(0).pos->y --;
+                    playerPos.pos->y --;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->y = height- 2;
+                    playerPos.pos->y = height- 2;
                 }
                 break;
             case DOWN: 
-                if (playerPosList->getElement(0).pos->y < height-2)     //as soon as the character goes to border it starts again at the top
+                if (playerPos.pos->y < height-2)     //as soon as the character goes to border it starts again at the top
                 {
-                    playerPosList->getElement(0).pos->y ++;
+                    playerPos.pos->y ++;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->y = 1;
+                    playerPos.pos->y = 1;
                 }
                 break;
             case LEFT:
-                if (playerPosList->getElement(0).pos->x > 1)      //as soon as the character goes to border it starts again at the right
+                if (playerPos.pos->x > 1)      //as soon as the character goes to border it starts again at the right
                 {
-                    playerPosList->getElement(0).pos->x --;
+                    playerPos.pos->x --;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->x = width - 2;
+                    playerPos.pos->x = width - 2;
                 }
                 break;
             case RIGHT:
-                if (playerPosList->getElement(0).pos->x < width-2)  //as soon as the character goes to border it starts again at the left
+                if (playerPos.pos->x < width-2)  //as soon as the character goes to border it starts again at the left
                 {
-                    playerPosList->getElement(0).pos->x ++;
+                    playerPos.pos->x ++;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->x = 1;
+                    playerPos.pos->x = 1;
                 }
                 break;
         }

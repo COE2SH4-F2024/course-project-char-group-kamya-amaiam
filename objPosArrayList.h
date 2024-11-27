@@ -29,11 +29,6 @@ class objPosArrayList
         objPos getHeadElement() const;
         objPos getTailElement() const;
         objPos getElement(int index) const;
-
-        //ITERATION 3
-        bool checkFoodConsumption();
-        void increasePlayerLength();
-        bool checkSelfCollision();
     
 };
 

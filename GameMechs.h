@@ -52,7 +52,7 @@ class GameMechs
         int getSpeed() const;
         void setSpeed(char symbol);
 
-        void generateFood(objPosArrayList* blockOff);
+        void generateFood(objPos blockoff);
         objPos getFoodPos()const;
 
 
