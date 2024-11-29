@@ -77,11 +77,12 @@ void DrawScreen(void)
     
     //GAME STATS
     MacUILib_printf("Press 'Q' to decrease speed and 'E' to increase speed.\nCurrent Speed Level: %d\n\n", (myGM->getSpeed()+1));
-    MacUILib_printf("Press 'esc' to exit.\n\n\n");
+    MacUILib_printf("Press 'esc' to exit.\n\n");
+    MacUILib_printf("Score: %d\n\n\n", myGM->getScore());
     //POSITION STATS
-    objPos playerPos = myPlayer -> getPlayerPos()->getElement(0); 
+    objPosArrayList* playerPos = myPlayer->getPlayerPos(); 
     objPos foodPos = myGM->getFoodPos();
-    MacUILib_printf("player [x, y, symbol] = [%d, %d, %c]\n" , playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
+    //MacUILib_printf("player [x, y, symbol] = [%d, %d, %c]\n" , playerPos->getElement(0).pos->x, playerPos.getElement(0).pos->y, playerPos->getElement(0).symbol);
     
     int boardX = myGM->getBoardSizeX(); //gets rows value
     int boardY = myGM->getBoardSizeY(); //gets column value
@@ -97,20 +98,43 @@ void DrawScreen(void)
             {
                 MacUILib_printf("#");
             } 
+            else 
+            {
+                bool isPrinted = false;
+                for (int k = 0; k < playerPos->getSize(); k++)
+                {
+                    if (i == playerPos->getElement(k).pos->y && j == playerPos->getElement(k).pos->x) //draws player 
+                        {
+                            MacUILib_printf("%c", playerPos->getElement(k).symbol);
+                            isPrinted = true;
+                            break;
+                        }
 
-            else if (i == playerPos.pos->y && j == playerPos.pos->x) //draws player 
-            {
-                MacUILib_printf("%c", playerPos.symbol);
-            }
-            else if (i == foodPos.pos->y && j == foodPos.pos->x) //draws food 
-            {
-                MacUILib_printf("%c", foodPos.symbol);
-            }
+                }
+                if (!isPrinted && i == foodPos.pos->y && j == foodPos.pos->x)
+                {
+                    MacUILib_printf("%c", foodPos.symbol);
+                }
 
-            else
-            {
-                MacUILib_printf(" ");
-            }  
+                // If neither snake nor food, print an empty space
+                if (!isPrinted && !(i == foodPos.pos->y && j == foodPos.pos->x))
+                {
+                    MacUILib_printf(" ");
+                }
+
+            }
+            
+
+            
+            // if (!isPrinted && i == foodPos.pos->y && j == foodPos.pos->x) //draws food 
+            // {
+            //     MacUILib_printf("%c", foodPos.symbol);
+            // }
+
+            // else  
+            // {
+            //     MacUILib_printf(" ");
+            // }  
 
         }
          MacUILib_printf("\n");

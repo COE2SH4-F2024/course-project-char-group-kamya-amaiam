@@ -23,6 +23,8 @@ class Player
         void movePlayer();
 
         // More methods to be added here
+        bool checkFoodConsumption();
+        void increasePlayerLength();
 
     private:
         objPosArrayList* playerPosList; // Upgraded in iteration 3.       

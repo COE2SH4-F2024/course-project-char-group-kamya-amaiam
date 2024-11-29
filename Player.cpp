@@ -23,7 +23,7 @@ Player::~Player()
 
 objPosArrayList* Player::getPlayerPos() const
 {
-    return playerPosList;
+    return playerPosList;  //returns the snake array list 
 }
 
 void Player::updatePlayerDir()
@@ -96,57 +96,103 @@ void Player::updatePlayerDir()
 
 void Player::movePlayer()
 {
+    //temp head position
 
+    
     // PPA3 Finite State Machine logic
     if(currentdir != STOP)
     {
+        
         int height = mainGameMechsRef->getBoardSizeY();
         int width = mainGameMechsRef->getBoardSizeX();
+
+        //get the current head position
+        objPos temphead = getPlayerPos()->getHeadElement();
         switch (currentdir)
         {
             case UP:
                 // [TODO] : Heed the border wraparound!!!
-                if (playerPosList->getElement(0).pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
+                if (temphead.pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
                 {
-                    playerPosList->getElement(0).pos->y --;
+                    temphead.pos->y --;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->y = height- 2;
+                    temphead.pos->y = height- 2;
                 }
                 break;
             case DOWN: 
-                if (playerPosList->getElement(0).pos->y < height-2)     //as soon as the character goes to border it starts again at the top
+                if (temphead.pos->y < height-2)     //as soon as the character goes to border it starts again at the top
                 {
-                    playerPosList->getElement(0).pos->y ++;
+                    temphead.pos->y ++;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->y = 1;
+                    temphead.pos->y = 1;
                 }
                 break;
             case LEFT:
-                if (playerPosList->getElement(0).pos->x > 1)      //as soon as the character goes to border it starts again at the right
+                if (temphead.pos->x > 1)      //as soon as the character goes to border it starts again at the right
                 {
-                    playerPosList->getElement(0).pos->x --;
+                    temphead.pos->x --;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->x = width - 2;
+                    temphead.pos->x = width - 2;
                 }
                 break;
             case RIGHT:
-                if (playerPosList->getElement(0).pos->x < width-2)  //as soon as the character goes to border it starts again at the left
+                if (temphead.pos->x < width-2)  //as soon as the character goes to border it starts again at the left
                 {
-                    playerPosList->getElement(0).pos->x ++;
+                    temphead.pos->x ++;
                 }
                 else
                 {
-                    playerPosList->getElement(0).pos->x = 1;
+                    temphead.pos->x = 1;
                 }
                 break;
         }
+        //inserts the new head
+        getPlayerPos()->insertHead(temphead);
+
+        //checks for food consumption 
+        if (checkFoodConsumption())
+        {
+            increasePlayerLength();
+        }
+        else
+        {
+            getPlayerPos()->removeTail();
+        }
+        
     }
+    
 }
 
+
 // More methods to be added
+bool Player::checkFoodConsumption()
+{
+    //get the player head
+    objPos head = getPlayerPos()->getHeadElement();
+
+    //get food position 
+    objPos food = mainGameMechsRef->getFoodPos();
+
+    //checks for collision
+    if (head.pos->x == food.pos->x && head.pos->y == food.pos->y)
+    {
+        return true;//food consumed 
+    }
+
+    return false;//if no food consumed 
+
+}
+void Player::increasePlayerLength()
+{
+    //generates new food 
+    mainGameMechsRef->generateFood(getPlayerPos());
+
+    //update the score 
+    mainGameMechsRef->incrementScore();
+}
