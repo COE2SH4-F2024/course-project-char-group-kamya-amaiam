@@ -53,6 +53,8 @@ void Initialize(void)
 
     myGM->generateFood(myPlayer->getPlayerPos());
 
+    srand(time(NULL));
+
 }
 
 void GetInput(void)
@@ -77,7 +79,7 @@ void DrawScreen(void)
     MacUILib_printf("Press 'Q' to decrease speed and 'E' to increase speed.\nCurrent Speed Level: %d\n\n", (myGM->getSpeed()+1));
     MacUILib_printf("Press 'esc' to exit.\n\n\n");
     //POSITION STATS
-    objPos playerPos = myPlayer -> getPlayerPos(); 
+    objPos playerPos = myPlayer -> getPlayerPos()->getElement(0); 
     objPos foodPos = myGM->getFoodPos();
     MacUILib_printf("player [x, y, symbol] = [%d, %d, %c]\n" , playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
     

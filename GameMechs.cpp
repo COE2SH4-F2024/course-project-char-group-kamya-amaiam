@@ -125,29 +125,34 @@ void GameMechs::setSpeed(char symbol)
 
 }
 
-void GameMechs::generateFood(objPos blockoff)
+void GameMechs::generateFood(objPosArrayList* blockoff)
 {
     //player position for now 
-    srand(time(NULL));
+    //srand(time(NULL));
 
     int randX, randY;
 
     bool uniquePos = false;
-    while(!uniquePos)
-    {
+    while(!uniquePos){
         randX = rand()%(boardSizeX-2) + 1;
         randY = rand()%(boardSizeY-2) + 1;
 
-        if(randX != blockoff.pos->x || randY != blockoff.pos->y)
-        {
+        // if(randX != blockoff->getElement(0).pos->x || randY != blockoff->getElement(0).pos->y) {
+        //     uniquePos = true;
+        //     food.setObjPos(randX, randY, '*');
+        // }        
+
+
+        for (int i=0; i<blockoff->getSize(); i++){
+
+            if(randX != blockoff->getElement(i).pos->x || randY != blockoff->getElement(i).pos->y) {
             uniquePos = true;
             food.setObjPos(randX, randY, '*');
-            MacUILib_printf("generated food positions %d, %d", randX, randY);
+            }
+
         }
+
     }
-
-    
-
 
 }
 

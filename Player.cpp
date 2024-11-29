@@ -4,27 +4,26 @@
 Player::Player(GameMechs* thisGMRef)
 {
     mainGameMechsRef = thisGMRef;
+    
     currentdir = STOP;
 
-    // more actions to be included
-    playerPos.pos->x = mainGameMechsRef->getBoardSizeX() / 2;
-    playerPos.pos->y = mainGameMechsRef->getBoardSizeY() / 2;
-    playerPos.symbol = '@';
+    playerPosList = new objPosArrayList();
+
+    objPos headPos (mainGameMechsRef->getBoardSizeX()/2, mainGameMechsRef->getBoardSizeY() / 2, '@');
+
+    playerPosList->insertHead(headPos);
 
 }
 
 
 Player::~Player()
 {
-    // delete any heap members here
-    //no key word new in the constructor 
-    //leave it empty for now 
+    delete playerPosList;
 }
 
-objPos Player::getPlayerPos() const
+objPosArrayList* Player::getPlayerPos() const
 {
-    // return the reference to the playerPos arrray list
-    return playerPos;
+    return playerPosList;
 }
 
 void Player::updatePlayerDir()
@@ -76,7 +75,9 @@ void Player::updatePlayerDir()
         case 'q':
             (mainGameMechsRef->setSpeed('-')); 
             break;
-
+        case 'f':
+            mainGameMechsRef->generateFood(getPlayerPos());
+            break;
         case 27:
             mainGameMechsRef->setExitTrue();
             
@@ -95,8 +96,9 @@ void Player::updatePlayerDir()
 
 void Player::movePlayer()
 {
+
     // PPA3 Finite State Machine logic
-       if(currentdir != STOP)
+    if(currentdir != STOP)
     {
         int height = mainGameMechsRef->getBoardSizeY();
         int width = mainGameMechsRef->getBoardSizeX();
@@ -104,43 +106,43 @@ void Player::movePlayer()
         {
             case UP:
                 // [TODO] : Heed the border wraparound!!!
-                if (playerPos.pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
+                if (playerPosList->getElement(0).pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
                 {
-                    playerPos.pos->y --;
+                    playerPosList->getElement(0).pos->y --;
                 }
                 else
                 {
-                    playerPos.pos->y = height- 2;
+                    playerPosList->getElement(0).pos->y = height- 2;
                 }
                 break;
             case DOWN: 
-                if (playerPos.pos->y < height-2)     //as soon as the character goes to border it starts again at the top
+                if (playerPosList->getElement(0).pos->y < height-2)     //as soon as the character goes to border it starts again at the top
                 {
-                    playerPos.pos->y ++;
+                    playerPosList->getElement(0).pos->y ++;
                 }
                 else
                 {
-                    playerPos.pos->y = 1;
+                    playerPosList->getElement(0).pos->y = 1;
                 }
                 break;
             case LEFT:
-                if (playerPos.pos->x > 1)      //as soon as the character goes to border it starts again at the right
+                if (playerPosList->getElement(0).pos->x > 1)      //as soon as the character goes to border it starts again at the right
                 {
-                    playerPos.pos->x --;
+                    playerPosList->getElement(0).pos->x --;
                 }
                 else
                 {
-                    playerPos.pos->x = width - 2;
+                    playerPosList->getElement(0).pos->x = width - 2;
                 }
                 break;
             case RIGHT:
-                if (playerPos.pos->x < width-2)  //as soon as the character goes to border it starts again at the left
+                if (playerPosList->getElement(0).pos->x < width-2)  //as soon as the character goes to border it starts again at the left
                 {
-                    playerPos.pos->x ++;
+                    playerPosList->getElement(0).pos->x ++;
                 }
                 else
                 {
-                    playerPos.pos->x = 1;
+                    playerPosList->getElement(0).pos->x = 1;
                 }
                 break;
         }
