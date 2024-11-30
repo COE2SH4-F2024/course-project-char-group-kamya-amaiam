@@ -96,13 +96,9 @@ void Player::updatePlayerDir()
 
 void Player::movePlayer()
 {
-    //temp head position
-
-    
     // PPA3 Finite State Machine logic
     if(currentdir != STOP)
     {
-        
         int height = mainGameMechsRef->getBoardSizeY();
         int width = mainGameMechsRef->getBoardSizeX();
 
@@ -111,7 +107,6 @@ void Player::movePlayer()
         switch (currentdir)
         {
             case UP:
-                // [TODO] : Heed the border wraparound!!!
                 if (temphead.pos->y > 1)  //as soon as the character goes to border it starts again at the bottom 
                 {
                     temphead.pos->y --;
@@ -152,17 +147,29 @@ void Player::movePlayer()
                 }
                 break;
         }
+
         //inserts the new head
         getPlayerPos()->insertHead(temphead);
 
-        //checks for food consumption 
-        if (checkFoodConsumption())
+        //check for collision
+        if (checkSelfCollision()) 
         {
-            increasePlayerLength();
+            mainGameMechsRef->setLoseFlag();
+            mainGameMechsRef->setExitTrue();
         }
-        else
+
+        else //no self collision
         {
-            getPlayerPos()->removeTail();
+            //checks for food consumption 
+            if (checkFoodConsumption())
+            {
+                increasePlayerLength();
+            }
+            else
+            {
+                getPlayerPos()->removeTail();
+            }
+
         }
         
     }
@@ -188,6 +195,7 @@ bool Player::checkFoodConsumption()
     return false;//if no food consumed 
 
 }
+
 void Player::increasePlayerLength()
 {
     //generates new food 
@@ -195,4 +203,21 @@ void Player::increasePlayerLength()
 
     //update the score 
     mainGameMechsRef->incrementScore();
+}
+
+bool Player::checkSelfCollision() //returns true if collision will occur
+{
+    objPos head = getPlayerPos()->getHeadElement();
+
+    for (int i = 1; i < getPlayerPos()->getSize(); i++)
+    {
+        if (head.pos->x == getPlayerPos()->getElement(i).pos->x && head.pos->y == getPlayerPos()->getElement(i).pos->y) 
+        {
+            return true;
+        }
+
+    }
+
+    return false; //if head element doesnt collide with any body elements, then no collision will occur
+
 }
