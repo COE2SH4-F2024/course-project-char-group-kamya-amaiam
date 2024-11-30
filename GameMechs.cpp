@@ -133,21 +133,17 @@ void GameMechs::generateFood(objPosArrayList* blockoff)
     int randX, randY;
 
     bool uniquePos = false;
-    while(!uniquePos){
+    while(!uniquePos)
+    {
         randX = rand()%(boardSizeX-2) + 1;
         randY = rand()%(boardSizeY-2) + 1;
 
-        // if(randX != blockoff->getElement(0).pos->x || randY != blockoff->getElement(0).pos->y) {
-        //     uniquePos = true;
-        //     food.setObjPos(randX, randY, '*');
-        // }        
-
-
-        for (int i=0; i<blockoff->getSize(); i++){
-
-            if(randX != blockoff->getElement(i).pos->x || randY != blockoff->getElement(i).pos->y) {
-            uniquePos = true;
-            food.setObjPos(randX, randY, '*');
+        for (int i=0; i<blockoff->getSize(); i++)
+        {
+            if(randX != blockoff->getElement(i).pos->x && randY != blockoff->getElement(i).pos->y) 
+            {
+                uniquePos = true;
+                food.setObjPos(randX, randY, '*');
             }
 
         }
