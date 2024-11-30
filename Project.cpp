@@ -6,9 +6,9 @@
 using namespace std;
 
 
+
 const int speeds[5] = {200000, 175000, 150000, 125000, 100000}; //contols how fast the game is 
 // speed levels in seconds: 0.2, 0.175, 0.15, 0.125, 0.1
-
 
 Player *myPlayer; // global pointer meant to instantiate a player object 
 GameMechs *myGM;
