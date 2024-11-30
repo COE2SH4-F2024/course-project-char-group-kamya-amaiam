@@ -1,9 +1,11 @@
 #ifndef OBJPOS_ARRAYLIST_H
 #define OBJPOS_ARRAYLIST_H
 
+#include "objPos.h"
+
 #define ARRAY_MAX_CAP 200
 
-#include "objPos.h"
+
 
 class objPosArrayList
 {
@@ -12,11 +14,12 @@ class objPosArrayList
         int listSize;
         int arrayCapacity;
 
+
     public:
-        objPosArrayList(); //constructor (1/4)
-        ~objPosArrayList(); //destructor (2/4)
-        objPosArrayList(const objPosArrayList &sList); //copy constructor (3/4)
-        objPosArrayList& operator=(const objPosArrayList &sList); //copy assignment constructor (4/4)
+        objPosArrayList(); //constructor
+        ~objPosArrayList(); //destructor
+        objPosArrayList(const objPosArrayList &sList); //copy constructor
+        objPosArrayList& operator=(const objPosArrayList &sList); //copy assignment constructor
 
 
         int getSize() const;
