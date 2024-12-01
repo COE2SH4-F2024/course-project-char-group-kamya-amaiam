@@ -45,10 +45,11 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    myGM=new GameMechs();
+    myGM = new GameMechs();
     myPlayer = new Player(myGM);
 
     myGM->generateFood(myPlayer->getPlayerPos());
+    myGM->setFoodPos(-1,-1,'*');
 
     srand(time(NULL)); //for random number generation
 }
@@ -63,6 +64,11 @@ void GetInput(void)
 
 void RunLogic(void)
 {
+    if (myGM->getFoodPos().pos->x == -1 && myGM->getFoodPos().pos->y == -1)
+    {
+        myGM->generateFood(myPlayer->getPlayerPos());
+    }
+
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();    
 }

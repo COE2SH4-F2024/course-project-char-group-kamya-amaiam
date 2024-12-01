@@ -132,6 +132,18 @@ void GameMechs::setSpeed(char symbol)
 }
 
 
+void GameMechs::setFoodPos(int x, int y, char symbol)
+{
+    food.setObjPos(x, y, symbol);
+}
+
+
+objPos GameMechs::getFoodPos() const
+{
+    return food; 
+}
+
+
 void GameMechs::generateFood(objPosArrayList* blockoff)
 {
     int randX, randY;
@@ -147,14 +159,8 @@ void GameMechs::generateFood(objPosArrayList* blockoff)
             if(randX != blockoff->getElement(i).pos->x && randY != blockoff->getElement(i).pos->y) 
             {
                 uniquePos = true;
-                food.setObjPos(randX, randY, '*');
+                setFoodPos(randX, randY, '*');
             }
         }
     }
-}
-
-
-objPos GameMechs::getFoodPos() const
-{
-    return food; 
 }
