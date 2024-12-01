@@ -2,14 +2,14 @@
 
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef) 
 {
     mainGameMechsRef = thisGMRef;
     currentdir = STOP;
 
-    playerPosList = new objPosArrayList();
+    playerPosList = new objPosArrayList(); //creates initial snake body list 
 
-    objPos headPos (mainGameMechsRef->getBoardSizeX()/2, mainGameMechsRef->getBoardSizeY() / 2, '@');
+    objPos headPos (mainGameMechsRef->getBoardSizeX()/2, mainGameMechsRef->getBoardSizeY() / 2, '@'); //initializes snake position
     playerPosList->insertHead(headPos);
 }
 
@@ -26,7 +26,7 @@ objPosArrayList* Player::getPlayerPos() const
 }
 
 
-void Player::updatePlayerDir()
+void Player::updatePlayerDir()  //tracks player direction 
 {
     char input = mainGameMechsRef->getInput();
     
@@ -202,7 +202,7 @@ bool Player::checkFoodConsumption()
 }
 
 
-void Player::increasePlayerLength()
+void Player::increasePlayerLength() 
 {
     mainGameMechsRef->generateFood(getPlayerPos()); //generates new food 
     mainGameMechsRef->incrementScore(); //update the score 

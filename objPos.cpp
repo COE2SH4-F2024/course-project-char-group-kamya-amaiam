@@ -1,6 +1,6 @@
 #include "objPos.h"
 
-objPos::objPos()
+objPos::objPos()  //default constructor 
 {
     pos = new Pos;
     pos->x = 0;
@@ -8,7 +8,7 @@ objPos::objPos()
     symbol = 0; //NULL
 }
 
-objPos::objPos(int xPos, int yPos, char sym)
+objPos::objPos(int xPos, int yPos, char sym) //manual constructor 
 {
     pos = new Pos;
     pos->x = xPos;
@@ -18,7 +18,8 @@ objPos::objPos(int xPos, int yPos, char sym)
 
 // Respect the rule of six / minimum four
 // [TODO] Implement the missing special member functions to meet the minimum four rule
-objPos::~objPos()
+
+objPos::~objPos() //destructor 
 {
     delete pos;//deallocate memory 
     pos = nullptr;
@@ -46,21 +47,21 @@ objPos& objPos::operator = (const objPos& a)
 }
 
 
-void objPos::setObjPos(objPos o)
+void objPos::setObjPos(objPos o) //sets default object position 
 {
     pos->x = o.pos->x;
     pos->y = o.pos->y;
     symbol = o.symbol;
 }
 
-void objPos::setObjPos(int xPos, int yPos, char sym)
+void objPos::setObjPos(int xPos, int yPos, char sym) //sets object position manually 
 {
     pos->x = xPos;
     pos->y = yPos;
     symbol = sym;
 }
 
-objPos objPos::getObjPos() const
+objPos objPos::getObjPos() const //gets onject position 
 {
     objPos returnPos;
     returnPos.pos->x = pos->x;
@@ -70,7 +71,7 @@ objPos objPos::getObjPos() const
     return returnPos;
 }
 
-char objPos::getSymbol() const
+char objPos::getSymbol() const //returns symbol 
 {
     return symbol;
 }

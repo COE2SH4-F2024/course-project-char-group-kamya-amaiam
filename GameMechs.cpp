@@ -2,7 +2,7 @@
 #include "MacUILib.h"
 
 
-GameMechs::GameMechs()
+GameMechs::GameMechs()  //default constructor 
 {
     input = 0;
     exitFlag = false;
@@ -18,7 +18,7 @@ GameMechs::GameMechs()
 }
 
 
-GameMechs::GameMechs(int boardX, int boardY)
+GameMechs::GameMechs(int boardX, int boardY) //other constructor 
 {
     input = 0;
     exitFlag = false;
@@ -34,25 +34,25 @@ GameMechs::GameMechs(int boardX, int boardY)
 }
 
 
-GameMechs::~GameMechs()
+GameMechs::~GameMechs() //we do not need destructor 
 {
     //nothing on heap for now 
 }
 
 
-bool GameMechs::getExitFlagStatus() const
+bool GameMechs::getExitFlagStatus() const //returns exit flag
 {
     return exitFlag;
 }
 
 
-bool GameMechs::getLoseFlagStatus() const
+bool GameMechs::getLoseFlagStatus() const //returns losing status 
 {
     return loseFlag;
 }
     
 
-char GameMechs::getInput() 
+char GameMechs::getInput()  //receives inputs 
 {
     if(MacUILib_hasChar()!=0)
     {
@@ -62,61 +62,61 @@ char GameMechs::getInput()
 }
 
 
-int GameMechs::getScore() const
+int GameMechs::getScore() const //returns scores 
 {
     return score;
 }
 
 
-void GameMechs::incrementScore()
+void GameMechs::incrementScore() //increment sscore 
 {
     score++;
 }
 
 
-int GameMechs::getBoardSizeX() const
+int GameMechs::getBoardSizeX() const //returns board's row size 
 {
     return boardSizeX;
 }
 
 
-int GameMechs::getBoardSizeY() const
+int GameMechs::getBoardSizeY() const //returns boards column size 
 {
     return boardSizeY;
 }
 
 
-void GameMechs::setExitTrue()
+void GameMechs::setExitTrue()  //stes the exit statustrue 
 {
     exitFlag = true;
 }
 
 
-void GameMechs::setLoseFlag()
+void GameMechs::setLoseFlag() //sets loseflag as true 
 {
    loseFlag = true; 
 }
 
 
-void GameMechs::setInput(char this_input)
+void GameMechs::setInput(char this_input) //stes input 
 {
     input = this_input;
 }
 
 
-void GameMechs::clearInput()
+void GameMechs::clearInput() // resets input
 {
     input = 0;
 }
 
 
-int GameMechs::getSpeed() const
+int GameMechs::getSpeed() const //returns speed 
 {
     return speed;
 }
 
 
-void GameMechs::setSpeed(char symbol) 
+void GameMechs::setSpeed(char symbol) //speed management function 
 {
     if (symbol == '+') 
     {
@@ -132,29 +132,29 @@ void GameMechs::setSpeed(char symbol)
 }
 
 
-void GameMechs::setFoodPos(int x, int y, char symbol)
+void GameMechs::setFoodPos(int x, int y, char symbol) //sets food 
 {
     food.setObjPos(x, y, symbol);
 }
 
 
-objPos GameMechs::getFoodPos() const
+objPos GameMechs::getFoodPos() const //returns food 
 {
     return food; 
 }
 
 
-void GameMechs::generateFood(objPosArrayList* blockoff)
+void GameMechs::generateFood(objPosArrayList* blockoff) //generate food at randomlocations 
 {
     int randX, randY;
 
     bool uniquePos = false;
     while(!uniquePos)
     {
-        randX = rand()%(boardSizeX-2) + 1;
+        randX = rand()%(boardSizeX-2) + 1;  //generates random co-ordinates 
         randY = rand()%(boardSizeY-2) + 1;
 
-        for (int i=0; i<blockoff->getSize(); i++)
+        for (int i=0; i<blockoff->getSize(); i++) //makes sure it dosent generate on the sanke body 
         {
             if(randX != blockoff->getElement(i).pos->x && randY != blockoff->getElement(i).pos->y) 
             {

@@ -43,13 +43,13 @@ objPosArrayList& objPosArrayList::operator=(const objPosArrayList &sList) //copy
 }
 
 
-int objPosArrayList::getSize() const 
+int objPosArrayList::getSize() const //returns list size 
 {
     return listSize;
 }
 
 
-void objPosArrayList::insertHead(objPos thisPos) 
+void objPosArrayList::insertHead(objPos thisPos) //insert a head position
 {
     if (listSize == arrayCapacity){
         return;
@@ -64,14 +64,14 @@ void objPosArrayList::insertHead(objPos thisPos)
 }
 
 
-void objPosArrayList::insertTail(objPos thisPos) 
+void objPosArrayList::insertTail(objPos thisPos) //inserts a tail position
 {
     aList[listSize] = thisPos;
     listSize++;
 }
 
 
-void objPosArrayList::removeHead() 
+void objPosArrayList::removeHead() //removes head position
 {
     for (int i=0; i<listSize-2; i++)
     {
@@ -82,7 +82,7 @@ void objPosArrayList::removeHead()
 }
 
 
-void objPosArrayList::removeTail() 
+void objPosArrayList::removeTail() //removes tail position 
 {
     if (listSize == 0){
         return;
@@ -92,19 +92,19 @@ void objPosArrayList::removeTail()
 }
 
 
-objPos objPosArrayList::getHeadElement() const 
+objPos objPosArrayList::getHeadElement() const //returns what's at head position 
 {    
     return aList[0].getObjPos();
 }
 
 
-objPos objPosArrayList::getTailElement() const 
+objPos objPosArrayList::getTailElement() const  //returns what's at tail position 
 {
     return aList[listSize-1].getObjPos();   
 }
 
 
-objPos objPosArrayList::getElement(int index) const 
+objPos objPosArrayList::getElement(int index) const //returns the what's at the element position 
 {
     return aList[index].getObjPos();   
 }

@@ -55,7 +55,7 @@ void Initialize(void)
 }
 
 
-void GetInput(void)
+void GetInput(void)  //gets input 
 {
    char input = myGM->getInput();
    myGM->setInput(input);
@@ -126,10 +126,6 @@ void DrawScreen(void)
                 }
 
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> 31f0354866f810a88b07e534493db60d050f27b4
         }
 
         MacUILib_printf("\n");     
@@ -147,12 +143,12 @@ void CleanUp(void)
 {
     if(myGM->getLoseFlagStatus())
     {
-        MacUILib_printf("\n\nGame Over ! you lose.\n");
+        MacUILib_printf("\n\nGame Over ! you lose.\n");  //losing message 
     } 
 
     else 
     {
-        MacUILib_printf("\n\nThanks for playing!!!\n");
+        MacUILib_printf("\n\nThanks for playing!!!\n"); //forced exit message 
     }
 
     delete myPlayer;
