@@ -123,18 +123,6 @@ void DrawScreen(void)
                 }
 
             }
-            
-
-            
-            // if (!isPrinted && i == foodPos.pos->y && j == foodPos.pos->x) //draws food 
-            // {
-            //     MacUILib_printf("%c", foodPos.symbol);
-            // }
-
-            // else  
-            // {
-            //     MacUILib_printf(" ");
-            // }  
 
         }
          MacUILib_printf("\n");
